@@ -43,6 +43,7 @@ module.exports = {
         path: __dirname,
         filename: 'chrome-remote-interface.js',
         libraryTarget: process.env.TARGET || 'commonjs2',
-        library: 'CDP'
+        library: 'CDP',
+        hashFunction: 'xxhash64',
     }
 };
