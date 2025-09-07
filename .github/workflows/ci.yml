@@ -28,6 +28,7 @@ jobs:
         run: |
           $CHROME_BIN \
               --disable-extensions \
+              --disable-component-extensions-with-background-pages \
               --disable-gpu \
               --headless \
               --no-first-run \
