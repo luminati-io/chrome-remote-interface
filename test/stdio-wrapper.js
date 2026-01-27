@@ -50,6 +50,30 @@ describe('StdioWrapper', () => {
                 pipeRead.write(Buffer.from('message\0'));
             });
         });
+
+        it('should emit messages asynchronously via setImmediate', (done) => {
+            const { pipeWrite, pipeRead } = createMockStreams();
+            const wrapper = new StdioWrapper(pipeWrite, pipeRead);
+            const order = [];
+
+            wrapper.on('message', (msg) => {
+                order.push(`message:${msg}`);
+            });
+
+            wrapper.on('open', () => {
+                // Write data containing a complete message
+                pipeRead.write(Buffer.from('async\0'));
+                // This should run BEFORE the message event due to setImmediate
+                order.push('after-write');
+
+                setImmediate(() => {
+                    // Now the message should have been emitted
+                    assert.deepStrictEqual(order, ['after-write', 'message:async'],
+                        'message should be emitted asynchronously after synchronous code');
+                    wrapper.close(() => done());
+                });
+            });
+        });
     });
 
     describe('cleanup', () => {
