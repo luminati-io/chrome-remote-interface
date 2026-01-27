@@ -1,7 +1,6 @@
 'use strict';
 
 const assert = require('assert');
-const util = require('util');
 
 const Chrome = require('../');
 
@@ -73,7 +72,7 @@ describe('devtool interaction', () => {
             it('should return the target list', (done) => {
                 Chrome.List((err, targets) => {
                     assert.ifError(err);
-                    assert(util.isArray(targets));
+                    assert(Array.isArray(targets));
                     done();
                 });
             });
@@ -82,7 +81,7 @@ describe('devtool interaction', () => {
             it('should return the target list', (done) => {
                 Chrome.List().then((targets) => {
                     try {
-                        assert(util.isArray(targets));
+                        assert(Array.isArray(targets));
                         done();
                     } catch (err) {
                         done(err);
@@ -103,7 +102,7 @@ describe('devtool interaction', () => {
                         assert(targets.some((t) => {
                             return t.id === target.id;
                         }));
-                        assert(util.isArray(targets));
+                        assert(Array.isArray(targets));
                         assert.equal(target.url, 'chrome://newtab/');
                         done();
                     });
@@ -117,7 +116,7 @@ describe('devtool interaction', () => {
                         assert(targets.some((t) => {
                             return t.id === target.id;
                         }));
-                        assert(util.isArray(targets));
+                        assert(Array.isArray(targets));
                         done();
                     });
                 });
@@ -132,7 +131,7 @@ describe('devtool interaction', () => {
                             assert(targets.some((t) => {
                                 return t.id === target.id;
                             }));
-                            assert(util.isArray(targets));
+                            assert(Array.isArray(targets));
                             assert.equal(target.url, 'chrome://newtab/');
                             done();
                         });
@@ -151,7 +150,7 @@ describe('devtool interaction', () => {
                             assert(targets.some((t) => {
                                 return t.id === target.id;
                             }));
-                            assert(util.isArray(targets));
+                            assert(Array.isArray(targets));
                             done();
                         });
                     } catch (err) {
