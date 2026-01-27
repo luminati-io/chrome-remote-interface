@@ -226,7 +226,7 @@ describe('devtool interaction', () => {
             it('should return the version information', (done) => {
                 Chrome.Version((err, info) => {
                     assert.ifError(err);
-                    assert(util.isObject(info));
+                    assert(info !== null && typeof info === 'object');
                     done();
                 });
             });
@@ -235,7 +235,7 @@ describe('devtool interaction', () => {
             it('should return the version information', (done) => {
                 Chrome.Version().then((info) => {
                     try {
-                        assert(util.isObject(info));
+                        assert(info !== null && typeof info === 'object');
                         done();
                     } catch (err) {
                         done(err);
